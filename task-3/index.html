@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>Temprature calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="temp-calculator">
+        <h2 class="title">Temperature Converter</h2>
+        <div class="temp-value">
+          <p>Value to Convert:</p>
+          <input type="text" placeholder="0" required id="input_value" />
+        </div>
+        <div id="degree">
+          <span>
+            <p>From</p>
+            <select name="input" id="input">
+              <option value="Celsius">Celsius(°C)</option>
+              <option value="Fahrenhiet">Fahrenhiet(°F)</option>
+              <option value="Kelvin">Kelvin(°K)</option>
+            </select>
+          </span>
+          <span>
+            <p>To</p>
+            <select name="output" id="output">
+              <option value="fahrenhiet">Fahrenhiet(°F)</option>
+              <option value="celsius">Celsius(°C)</option>
+              <option value="kelvin">Kelvin(°K)</option>
+            </select>
+          </span>
+        </div>
+        <div class="btn">
+          <button type="button" id="clear" class="cal-btn" onclick="reset()">CLEAR</button>
+          <button type="button"id="convert" class="cal-btn" onclick="convertTemprature()" >CONVERT</button>
+        </div>
+
+        <div class="temp-value">
+          <p id="ans">Answer:</p>
+          <input type="text" id="result" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function convertTemprature() {
+        let val = document.getElementById("input_value");
+        let result = document.getElementById("result");
+        let input = document.getElementById("input");
+        let output = document.getElementById("output");
+
+        val.addEventListener("keyup", convertTemprature);
+        input.addEventListener("change", convertTemprature);
+        output.addEventListener("change", convertTemprature);
+
+        let inputValue = input.value;
+        let outputValue = output.value;
+
+        // celsius
+        if (inputValue === "celsius" && outputValue === "fahrenhiet") {
+          result.value = Number((val.value * 9) / 5) + 32;
+        } else if (inputValue === "celsius" && outputValue === "kelvin") {
+          result.value = Number(val.value) + 273.15;
+        } else if (inputValue === "celsius" && outputValue === "celsius") {
+          result.value = val.value;
+        }
+
+        // fahrenhiet
+        if (inputValue === "fahrenhiet" && outputValue === "celsius") {
+          result.value = Number((val.value - 32) * 5) / 9;
+        } else if (inputValue === "fahrenhiet" && outputValue === "kelvin") {
+          result.value = Number(((val.value - 32) * 5) / 9) + 273.15;
+        } else if (
+          inputValue === "fahrenhiet" &&
+          outputValue === "fahrenhiet"
+        ) {
+          result.value = val.value;
+        }
+
+        // kelvin
+        if (inputValue === "kelvin" && outputValue === "celsius") {
+          result.value = Number(val.value) - 273.15;
+        } else if (inputValue === "kelvin" && outputValue === "fahrenhiet") {
+          result.value = Number(((val.value - 273.15) * 9) / 5) + 32;
+        } else if (inputValue === "kelvin" && outputValue === "kelvin") {
+          result.value = val.value;
+        }
+      }
+
+      function reset() {
+        convertTemprature();
+      }
+    </script>
+
+
+  </body>
+</html>
