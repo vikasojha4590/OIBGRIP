@@ -101,7 +101,7 @@ body{
     display: flex;
     justify-content: space-between;
 }
-.btn button{
+.btn input{
     font-size: 16px;
     background-color: #ff004f;
     padding: 10px;
